@@ -1,9 +1,20 @@
+import { fbCfg } from "./firebaseconfig";
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+  	apiKey: fbCfg.apiKey,
+    authDomain: fbCfg.authDomain,
+    databaseURL: fbCfg.databaseURL,
+    projectId: fbCfg.projectId,
+    storageBucket: fbCfg.storageBucket,
+    messagingSenderId: fbCfg.messagingSenderId,
+    appId: fbCfg.appId,
+    measurementId: fbCfg.measurementId
+  }
 };
 
 /*

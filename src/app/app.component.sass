@@ -1,0 +1,42 @@
+@import "variables"
+@import "mixins"
+
+.plz-login
+	font-family: 'Montserrat', sans-serif
+	font-size: 40pt
+
+.button
+	@include background-gradient()
+	color: white
+	border: 0
+	padding: 10px
+	border-radius: 5px
+	cursor: pointer
+
+.viewport
+	position: fixed
+	width: 100%
+	height: 100%
+	@include background-gradient()
+
+.content
+	max-width: 1000px
+	margin: 0 auto
+	margin-top: 50px
+
+.login-card
+	margin: 0 auto
+	max-width: 600px
+	border-radius: 5px
+	padding: 20px
+	background: $dark-grey
+	color: white
+
+	&-footer
+		margin-top: 20px
+		text-align: center
+
+.header
+	background-color: $dark-grey
+	padding: 10px
+	text-align: right

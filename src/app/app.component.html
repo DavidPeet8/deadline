@@ -1,5 +1,21 @@
-<section class="viewport">
-  <div class="todo-list">
-    <app-todo-list></app-todo-list>
-  </div>
+<section *ngIf="auth.getUserObservable() | async as user; else showLogin" class="viewport">
+	<div class="header">
+		<button class="button" (click)="auth.signOut()">Sign Out</button>
+	</div>
+	<div class="content">
+		<app-todo-list></app-todo-list>
+	</div>
 </section>
+
+<ng-template #showLogin>
+	<section class="viewport">
+		<div class="content">
+			<div class="login-card"> 
+				<p class="plz-login text-center">Login to view your todo list.</p>
+				<div class="login-card-footer">
+					<button (click)="auth.googleSignIn()" class="button btn-login"> Login With Google</button>
+				</div>
+			</div>
+		</div>
+	</section>
+</ng-template>

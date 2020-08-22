@@ -1,3 +1,12 @@
-<section class="todo-list">
-	<app-todo-item></app-todo-item>
+<section>
+	<div class="additem-container">
+		The place to add stuff
+	</div>
+	<div *ngIf="hasData(); else noData" class="todo-list">
+		<app-todo-item *ngFor="let item of dataItems" [model]="item"></app-todo-item>
+	</div>
 </section>
+
+<ng-template #noData>
+	<p>No Data</p>
+</ng-template>

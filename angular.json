@@ -28,8 +28,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -121,8 +126,13 @@
               "devServerTarget": "todo:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "todo"
 }

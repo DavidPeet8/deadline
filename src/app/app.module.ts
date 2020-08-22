@@ -10,12 +10,14 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
+import { AddItemModalComponent } from './components/add-item-modal/add-item-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoItemComponent,
-    TodoListComponent
+    TodoListComponent,
+    AddItemModalComponent
   ],
   imports: [
     BrowserModule,

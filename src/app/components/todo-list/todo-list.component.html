@@ -1,7 +1,4 @@
 <section>
-	<div class="additem-container">
-		The place to add stuff
-	</div>
 	<div *ngIf="hasData(); else noData" class="todo-list">
 		<app-todo-item *ngFor="let item of dataItems" [model]="item"></app-todo-item>
 	</div>

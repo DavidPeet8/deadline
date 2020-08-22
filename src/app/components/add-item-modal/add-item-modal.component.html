@@ -1,0 +1,12 @@
+<section (click)="closeModal()" class="modal" #modal>
+	<div (click)="stopPropagation($event)" class="modal-content item-entry-form-container">
+		<p class="close" (click)="closeModal()" >&times;</p>
+		<form>
+			<label for="title"> Title:</label><br>
+			<input type="text" name="title"><br>
+			<label for="body">Description:</label><br>
+			<textarea name="body"></textarea>
+		</form>
+		<button class="button">Add</button>
+	</div>
+</section>

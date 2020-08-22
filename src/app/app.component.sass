@@ -11,7 +11,7 @@
 	height: 100%
 	@include gradient()
 	background-blend-mode: multiply
-	overflow: hidden
+	overflow-y: auto
 
 .content
 	max-width: 1000px
@@ -33,6 +33,9 @@
 		text-align: center
 
 .header
+	position: sticky
+	top: 0
+	left: 0
 	background-color: $dark-grey
 	padding: 10px
 	text-align: right

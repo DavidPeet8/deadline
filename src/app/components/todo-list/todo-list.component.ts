@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from "../../services/todo-data.service";
 import { TodoItem } from "../../models/TodoItem";
+import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-todo-list',
@@ -25,5 +26,16 @@ export class TodoListComponent implements OnInit {
       return this.dataItems.length > 0;
     }
     return false;
+  }
+
+  onDrop(event: CdkDragDrop<TodoItem[]>): void
+  {
+    let start = Math.min(event.previousIndex, event.currentIndex);
+    let end = Math.max(event.previousIndex, event.currentIndex);
+    for(let i = start; i <= end; i++ )// iterate accross this thing and swap priorities
+    {
+      // This actually requires a bit of math
+    }
+    moveItemInArray(this.dataItems, event.previousIndex, event.currentIndex);
   }
 }

@@ -1,15 +1,53 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { animate, style, transition, trigger, state } from '@angular/animations';
+import { TodoDataService } from '../../services/todo-data.service';
 
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.sass']
+  styleUrls: ['./todo-item.component.sass'],
+  animations: [
+  	trigger('grow', [
+  		state('noHeight', style({
+  			maxHeight: '0px'
+  		})),
+  		state('fullHeight', style({
+  			maxHeight: '1000px'
+  		})),
+  		transition('noHeight => fullHeight', [
+  			animate('0.5s')
+  		]),
+  		transition('fullHeight => noHeight', [
+  			animate('0.1s')
+  		])
+  	]),
+  	trigger('titleStyle', [
+  		state('plain', style({
+  			marginBottom: '0px',
+  			borderBottom: '0px'
+  		})),
+  		state('decorated', style({
+  			marginBottom: '10px',
+  			borderBottom: '1px solid white'
+  		})),
+  		transition('plain => decorated', [
+  			animate('0.1s')
+  		]),
+  		transition('decorated => plain', [
+  			animate('0.1s')
+  		])
+  	])
+  ]
 })
 export class TodoItemComponent implements OnInit 
 {
 	@Input() model;
+	@ViewChild('body') body: ElementRef;
+	@ViewChild('title') title: ElementRef;
+	isFullHeight: boolean = false;
 
-	constructor() { }
+
+	constructor(private dataService: TodoDataService) { }
 
 	ngOnInit(): void {
 	}
@@ -17,6 +55,31 @@ export class TodoItemComponent implements OnInit
 	getTitle(): string
 	{
 		return this.model.title;
+	}
+
+	getBody(): string
+	{
+		return this.model.description;
+	}
+
+	hasBody(): boolean
+	{
+		return this.model.description;
+	}
+
+	showBody(): void
+	{
+		if (this.hasBody())
+		{
+			this.isFullHeight = !this.isFullHeight; // trigger the animation
+		}
+	}
+
+	editItem(): void {}
+
+	deleteItem(): void 
+	{
+		this.dataService.deleteItem(this.model);
 	}
 
 }

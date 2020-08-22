@@ -1,2 +1,52 @@
+@import "variables"
+$item-padding: 10px
+
 .todo-item
-	padding: 10px
+	display: flex
+	flex-flow: row nowrap
+	border-radius: 5px
+	background-color: $dark-grey
+	overflow: hidden
+	margin-bottom: 10px
+
+.reorder-handle
+	margin-right: 20px
+	padding: $item-padding 0 $item-padding $item-padding
+	flex-grow: 0
+	cursor: pointer
+
+.item-content
+	display: flex
+	flex-flow: column nowrap
+	padding: $item-padding 0
+	flex-grow: 1
+
+.item-title
+	font-weight: bold
+
+.item-body
+	max-height: 0
+	overflow: hidden
+
+.delete-button
+	display: flex
+	align-items: center
+	justify-content: center
+	background: red
+	overflow: hidden
+	flex-grow: 0
+	min-width: 60px
+
+.edit-button
+	display: flex
+	align-items: center
+	justify-content: center
+	margin-left: 10px
+	background: #3477F5
+	overflow: hidden
+	flex-grow: 0
+	min-width: 60px
+
+.drag-placeholder
+	height: 0
+	border-bottom: 2px solid white

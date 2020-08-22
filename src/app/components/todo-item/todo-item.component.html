@@ -1,3 +1,16 @@
-<section class="todo-item">
-	<p>{{getTitle()}}</p>
+<section cdkDrag cdkDragLockAxis="y" class="todo-item" #item>
+	<div class="drag-placeholder" *cdkDragPlaceholder></div>
+	<div class="reorder-handle" cdkDragHandle>
+		<i class="fas fa-bars"></i>
+	</div>
+	<div class="item-content" (click)="showBody()">
+		<p [@titleStyle]="isFullHeight ? 'decorated' : 'plain'" class="item-title" #title>{{ getTitle() }}</p>
+		<p [@grow]="isFullHeight ? 'fullHeight' : 'noHeight'" class="item-body" #body>{{ getBody() }}</p>
+	</div>
+	<div class="edit-button" (click)="editItem()">
+		<i class="fas fa-pencil-alt"></i>
+	</div>
+	<div class="delete-button" (click)="deleteItem()">
+		<i class="fas fa-trash-alt"></i>
+	</div>
 </section>

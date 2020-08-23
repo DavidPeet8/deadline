@@ -3,14 +3,28 @@
 	<div class="reorder-handle" cdkDragHandle>
 		<i class="fas fa-bars"></i>
 	</div>
-	<div class="item-content" (click)="showBody()">
-		<p [@titleStyle]="isFullHeight ? 'decorated' : 'plain'" class="item-title" #title>{{ getTitle() }}</p>
-		<p [@grow]="isFullHeight ? 'fullHeight' : 'noHeight'" class="item-body" #body>{{ getBody() }}</p>
+	<div *ngIf="!isEditing; else showEditing" class="item-content" (click)="showBody()">
+		<p [@titleStyle]="isFullHeight ? 'decorated' : 'plain'" class="item-title">{{ getTitle() }}</p>
+		<p [@grow]="isFullHeight ? 'fullHeight' : 'noHeight'" class="item-body">{{ getBody() }}</p>
 	</div>
-	<div class="edit-button" (click)="editItem()">
+	<div *ngIf="!isEditing; else showSave" class="edit-button" (click)="editItem($event)">
 		<i class="fas fa-pencil-alt"></i>
 	</div>
 	<div class="delete-button" (click)="deleteItem()">
 		<i class="fas fa-trash-alt"></i>
 	</div>
 </section>
+
+
+<ng-template #showEditing>
+	<div class="item-content">
+		<input type="text" name="title" placeholder="Item Title..." [(ngModel)]="model.title" #title/>
+		<textarea name="body" placeholder="Optional Item Description..." [(ngModel)]="model.description"></textarea>
+	</div>
+</ng-template>
+
+<ng-template #showSave>
+	<div class="edit-button" (click)="saveItem($event)">
+		<i class="fas fa-save"></i>
+	</div>
+</ng-template>

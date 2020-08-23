@@ -42,9 +42,9 @@ import { TodoDataService } from '../../services/todo-data.service';
 export class TodoItemComponent implements OnInit 
 {
 	@Input() model;
-	@ViewChild('body') body: ElementRef;
-	@ViewChild('title') title: ElementRef;
+	@ViewChild('showEditing') editing: ElementRef;
 	isFullHeight: boolean = false;
+  isEditing: boolean = false;
 
 
 	constructor(private dataService: TodoDataService) { }
@@ -75,14 +75,20 @@ export class TodoItemComponent implements OnInit
 		}
 	}
 
-	editItem(): void 
+	editItem(event): void 
   {
-    
+    this.isEditing = true;
   }
 
 	deleteItem(): void 
 	{
 		this.dataService.deleteItem(this.model);
 	}
+
+  saveItem(): void 
+  {
+    this.isEditing = false;
+    this.dataService.updateItem(this.model);
+  }
 
 }

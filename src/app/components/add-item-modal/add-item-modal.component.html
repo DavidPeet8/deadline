@@ -3,7 +3,7 @@
 		<p class="close" (click)="closeModal()" >&times;</p>
 		<form (ngSubmit)="submitForm($event)" class="item-form">
 			<label for="title"> Title:</label><br>
-			<input type="text" name="title" placeholder="Item Title..." [(ngModel)]="item.title" #title><br><br>
+			<input type="text" name="title" placeholder="Item Title..." [(ngModel)]="item.title" #title/><br><br>
 			<label for="body">Description:</label><br>
 			<textarea name="body" placeholder="Optional Item Description..." [(ngModel)]="item.description"></textarea>
 		</form>

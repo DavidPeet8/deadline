@@ -3,7 +3,7 @@
 
 .plz-login
 	font-family: 'Montserrat', sans-serif
-	font-size: 40pt
+	font-size: 30pt
 
 .viewport
 	position: fixed
@@ -34,11 +34,23 @@
 
 .header
 	position: sticky
+	display: flex
+	flex-flow: row nowrap
+	justify-content: space-between
+	align-items: center
 	top: 0
 	left: 0
 	background-color: $dark-grey
 	padding: 10px
 	text-align: right
+
+.links
+	display: flex
+	flex-flow: row nowrap
+	justify-content: space-between
+	align-items: center
+	width: 120px
+	font-size: 25pt
 
 .addbtn
 	$size: 60px

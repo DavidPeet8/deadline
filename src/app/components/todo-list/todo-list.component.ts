@@ -32,10 +32,33 @@ export class TodoListComponent implements OnInit {
   {
     let start = Math.min(event.previousIndex, event.currentIndex);
     let end = Math.max(event.previousIndex, event.currentIndex);
-    for(let i = start; i <= end; i++ )// iterate accross this thing and swap priorities
+
+    if (event.previousIndex < event.currentIndex) // move to lower location
     {
-      // This actually requires a bit of math
+      let temp = this.dataItems[end].priority;
+      for(let i = start+1; i <= end; i++) // shift all indicies back one
+      {
+        // take indicies and subtract one mod the diff
+        this.dataItems[i].priority--;
+        this.dataService.updateItem(this.dataItems[i]);
+      }
+      
+      this.dataItems[start].priority = temp;
+      this.dataService.updateItem(this.dataItems[start]);
     }
+    else if (event.previousIndex > event.currentIndex) // Move to higher location
+    {
+      let temp = this.dataItems[start].priority;
+      for(let i = start; i < end; i++) // iterate accross this thing and swap priorities
+      {
+        this.dataItems[i].priority++;
+        this.dataService.updateItem(this.dataItems[i]);
+      }
+      
+      this.dataItems[end].priority = temp;
+      this.dataService.updateItem(this.dataItems[end]);
+    }
+    
     moveItemInArray(this.dataItems, event.previousIndex, event.currentIndex);
   }
 }

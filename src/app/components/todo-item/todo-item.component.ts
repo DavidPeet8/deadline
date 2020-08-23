@@ -75,7 +75,10 @@ export class TodoItemComponent implements OnInit
 		}
 	}
 
-	editItem(): void {}
+	editItem(): void 
+  {
+    
+  }
 
 	deleteItem(): void 
 	{

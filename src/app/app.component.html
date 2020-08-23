@@ -1,5 +1,10 @@
 <section *ngIf="auth.getUserObservable() | async as user; else showLogin" class="viewport">
 	<div class="header">
+		<div class="links">
+			<a href="https://davidpeet8.github.io/website/#/" class="website-link"><i class="fas fa-link"></i></a>
+			<a href="https://github.com/DavidPeet8" class="github-link"><i class="fab fa-github-square"></i></a>
+			<a href="https://www.linkedin.com/in/dapeet/" class="linkedin-link"><i class="fab fa-linkedin"></i></a>
+		</div>
 		<button class="button" (click)="auth.signOut()">Sign Out</button>
 	</div>
 	<div class="content">
@@ -13,7 +18,7 @@
 	<section class="viewport">
 		<div class="content">
 			<div class="login-card"> 
-				<p class="plz-login text-center">Login to view your todo list.</p>
+				<p class="plz-login text-center">Login to begin</p>
 				<div class="login-card-footer">
 					<button (click)="auth.googleSignIn()" class="button btn-login"> Login With Google</button>
 				</div>

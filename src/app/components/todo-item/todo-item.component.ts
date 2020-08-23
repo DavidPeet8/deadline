@@ -85,7 +85,7 @@ export class TodoItemComponent implements OnInit
 		this.dataService.deleteItem(this.model);
 	}
 
-  saveItem(): void 
+  saveItem(event): void 
   {
     this.isEditing = false;
     this.dataService.updateItem(this.model);

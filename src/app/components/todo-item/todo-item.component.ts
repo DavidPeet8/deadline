@@ -72,7 +72,6 @@ export class TodoItemComponent implements OnInit
 	{
 		if (this.hasBody())
 		{
-      console.log(this.model.description);
 			this.isFullHeight = !this.isFullHeight; // trigger the animation
 		}
 	}

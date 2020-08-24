@@ -44,8 +44,6 @@ export class AddItemModalComponent implements OnInit, AfterViewInit {
 
   submitForm(event)
   {
-    console.log(event);
-    console.log("Item is: ", this.item)
     event.preventDefault();
     if (this.item.title == '') return;
 

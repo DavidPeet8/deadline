@@ -19,13 +19,15 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // Only here cuz google released code that doesnt work
 import 'firebase/analytics';
+import { HelpModalComponent } from './components/help-modal/help-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoItemComponent,
     TodoListComponent,
-    AddItemModalComponent
+    AddItemModalComponent,
+    HelpModalComponent
   ],
   imports: [
     BrowserModule,

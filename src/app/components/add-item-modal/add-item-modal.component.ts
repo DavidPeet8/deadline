@@ -38,18 +38,28 @@ export class AddItemModalComponent implements OnInit, AfterViewInit {
 
   stopPropagation(event) 
   {
-  	// Prevent parent element from being clicked
+  	// Prevent event from bubbling
   	event.stopPropagation();
   }
 
-  submitForm(event)
+  submitForm(event): void 
   {
     event.preventDefault();
+    this._submitForm();
+  }
+
+  _submitForm(): void 
+  {
     if (this.item.title == '') return;
 
     this.item.priority = this.dataService.getNumItems() + 1;
     this.dataService.addItem(this.item);
     this.closeModal();
+  }
+
+  onShiftEnter(event):void 
+  {
+    this._submitForm();
   }
 
 }

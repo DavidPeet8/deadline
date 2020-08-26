@@ -1,0 +1,15 @@
+<section (click)="closeModal()" class="modal" (keydown)="stopPropagation($event)">
+	<div class="modal-content help-container">
+		<p class="close" (click)="closeModal()" >&times;</p>
+
+		<div class="help-text">
+			<h2>Keyboard Shortcuts:</h2>
+			<ul>
+				<li>Open Add Item Screen from main screen: <strong>Ctrl + Shift + A</strong></li>
+				<li>Submit Item From Description Box: <strong>Ctrl + Shift + Enter</strong></li>
+				<li>Undo: Yet to be implemented</li>
+			</ul>
+		</div>
+	</div>
+</section>
+

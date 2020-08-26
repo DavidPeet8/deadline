@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from "./services/auth.service";
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
@@ -19,16 +19,6 @@ export class AppComponent {
   addItem(): void 
   {
   	this.router.navigate(['/add-item']);
-  }
-
-  @HostListener('document:keypress', ['$event'])
-  onShiftA(event: KeyboardEvent): void 
-  {
-    event.stopPropagation();
-    if (event.key == "A" && event.shiftKey == true && event.ctrlKey == true) 
-    {
-      this.addItem();
-    } 
   }
 }
 

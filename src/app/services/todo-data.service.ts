@@ -5,6 +5,7 @@ import { AuthService } from "./auth.service";
 
 import { Observable, of } from 'rxjs';
 import { map } from "rxjs/operators";
+import { State } from "../models/state";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class TodoDataService
 {
 	private itemsCollection: AngularFirestoreCollection<TodoItem>;
 	items: Observable<TodoItem[]>;
-	numItems: number = null
+	private numItems: number = null
+	private prevActions: State[] = []; // Keep max size of 5, most recent at 0, least recent at 5
 
 	constructor(private afs: AngularFirestore, private auth: AuthService ) 
 	{
@@ -34,13 +36,30 @@ export class TodoDataService
 
 	addItem(item: TodoItem): void
 	{
+		// this.prevActions.unshift(new State(item, 0));
+		// this.checkQueue();	
+		this._addItem(item);
+	}
+
+	private _addItem(item: TodoItem): void 
+	{
 		this.itemsCollection.add(item);
 	}
 
 	deleteItem(item: TodoItem): void
 	{
+		this.prevActions.unshift(new State(item, 1));
+		this.checkQueue();
+		this._deleteItem(item);
+		
+	}
+
+	private _deleteItem(item: TodoItem) 
+	{
 		let uid = this.auth.getUid();
 		const itemDoc = this.afs.doc(`users/${uid}/items/${item.id}`)
+		console.log(item);
+		console.log(itemDoc);
 		itemDoc.delete();
 	}
 
@@ -63,7 +82,34 @@ export class TodoDataService
 		};
 
 		return itemref.set(data, { merge: true });
+	}
 
+	undo(): void
+	{
+		if (this.prevActions.length == 0) return;
+		console.log(this.prevActions);
+		let prevState = this.prevActions.shift();
+		console.log(this.prevActions);
+		switch (prevState.action)
+		{
+			case 0: // Insert
+				//Do Nothing, no point in deleting item, 
+				break;
+			case 1: // Delete
+				this._addItem(prevState.itemState);
+				break;
+			case 2: // Edit
+				// Also do nothing the docs are too trash and I dont feel like scouring the internet more
+				break;
+		}
+	}
+
+	private checkQueue(): void 
+	{
+		if (this.prevActions.length > 5)
+		{
+			this.prevActions = this.prevActions.slice(5);
+		}
 	}
 }
 

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { TodoDataService } from "../../services/todo-data.service";
 import { TodoItem } from "../../models/TodoItem";
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,7 +12,7 @@ import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 export class TodoListComponent implements OnInit {
 	dataItems: TodoItem[];
 
-  constructor(private dataService: TodoDataService) { }
+  constructor(private dataService: TodoDataService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.items.subscribe((items: TodoItem[]) => {
@@ -60,5 +61,20 @@ export class TodoListComponent implements OnInit {
     }
     
     moveItemInArray(this.dataItems, event.previousIndex, event.currentIndex);
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  onKeyPress(event: KeyboardEvent): void 
+  {
+    event.stopPropagation();
+    if (event.key.toLowerCase() == "a" && event.shiftKey == true && event.ctrlKey == true) 
+    {
+      this.router.navigate(['/add-item']);
+    } 
+    else if (event.key.toLowerCase() == "z" && event.ctrlKey == true) 
+    {
+      // Undo
+      this.dataService.undo();
+    }
   }
 }

@@ -48,7 +48,7 @@ export class AddItemModalComponent implements OnInit, AfterViewInit {
     this._submitForm();
   }
 
-  _submitForm(): void 
+  private _submitForm(): void 
   {
     if (this.item.title == '') return;
 

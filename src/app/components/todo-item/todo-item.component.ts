@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { animate, style, transition, trigger, state } from '@angular/animations';
 import { TodoDataService } from '../../services/todo-data.service';
 
@@ -90,6 +90,15 @@ export class TodoItemComponent implements OnInit
   {
     this.isEditing = false;
     this.dataService.updateItem(this.model);
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  keySaveItem(event): void 
+  {
+    if (this.isEditing && event.key.toLowerCase() == 's' && event.shiftKey && event.ctrlKey)
+    {
+      this.saveItem(null);
+    }
   }
 
 }

@@ -13,6 +13,7 @@ $item-padding: 10px
 	margin-right: 20px
 	padding: $item-padding 0 $item-padding $item-padding
 	flex-grow: 0
+	flex-shrink: 0
 	cursor: pointer
 
 .item-content
@@ -20,6 +21,7 @@ $item-padding: 10px
 	flex-flow: column nowrap
 	padding: $item-padding 0
 	flex-grow: 1
+	flex-shrink: 1
 	input
 		width: 100%
 		border: 0
@@ -43,11 +45,13 @@ $item-padding: 10px
 
 .item-title
 	font-weight: bold
+	word-break: break-all
 
 .item-body
 	max-height: 0
 	overflow: hidden
 	white-space: pre-wrap
+	word-break: break-all
 
 .delete-button
 	display: flex
@@ -56,6 +60,7 @@ $item-padding: 10px
 	background: red
 	overflow: hidden
 	flex-grow: 0
+	flex-shrink: 0
 	min-width: 60px
 
 .edit-button
@@ -66,6 +71,7 @@ $item-padding: 10px
 	background: #3477F5
 	overflow: hidden
 	flex-grow: 0
+	flex-shrink: 0
 	min-width: 60px
 
 .drag-placeholder

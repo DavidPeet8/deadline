@@ -1,4 +1,4 @@
-<section cdkDrag cdkDragLockAxis="y" class="todo-item" #item>
+<section cdkDrag cdkDragLockAxis="y" class="todo-item" (swipeleft)="onSwipeLeft($event)" #item>
 	<div class="drag-placeholder" *cdkDragPlaceholder></div>
 	<div class="reorder-handle" cdkDragHandle>
 		<i class="fas fa-bars"></i>

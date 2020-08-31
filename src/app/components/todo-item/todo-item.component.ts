@@ -101,4 +101,8 @@ export class TodoItemComponent implements OnInit
     }
   }
 
+  onSwipeLeft(event): void 
+  {
+    alert("I'll be floored if this works")
+  }
 }

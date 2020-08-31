@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,9 +17,18 @@ import { AddItemModalComponent } from './components/add-item-modal/add-item-moda
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-// Only here cuz google released code that doesnt work
-import 'firebase/analytics';
 import { HelpModalComponent } from './components/help-modal/help-modal.component';
+
+import * as Hammer from 'hammerjs';
+
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any> {
+    swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
+    pinch: { enable: false },
+    rotate: { enable: false },
+    pan: { enable: false },
+  };
+}
 
 @NgModule({
   declarations: [
@@ -38,11 +47,16 @@ import { HelpModalComponent } from './components/help-modal/help-modal.component
     AppRoutingModule,
     FormsModule,
     DragDropModule,
-    AngularFireAnalyticsModule
+    AngularFireAnalyticsModule,
+    HammerModule,
   ],
   providers: [
     ScreenTrackingService,
-    UserTrackingService
+    UserTrackingService, 
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
   ],
   bootstrap: [AppComponent]
 })

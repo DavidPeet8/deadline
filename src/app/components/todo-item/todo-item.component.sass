@@ -8,6 +8,8 @@ $item-padding: 10px
 	background-color: $dark-grey
 	overflow: hidden
 	margin-bottom: 10px
+	max-width: inherit
+	overflow-x: hidden
 
 .reorder-handle
 	margin-right: 20px
@@ -22,6 +24,8 @@ $item-padding: 10px
 	padding: $item-padding 0
 	flex-grow: 1
 	flex-shrink: 1
+	margin-right: 10px
+
 	input
 		width: 100%
 		border: 0
@@ -45,13 +49,23 @@ $item-padding: 10px
 
 .item-title
 	font-weight: bold
-	word-break: break-all
+	overflow-wrap: break-word
+	word-break: break-word
 
 .item-body
 	max-height: 0
 	overflow: hidden
 	white-space: pre-wrap
-	word-break: break-all
+	overflow-wrap: break-word
+	word-break: break-word
+
+.modify-btns
+	display: flex
+	flex-flow: row nowrap
+	flex-grow: 0
+	flex-shrink: 0
+	justify-content: flex-end
+	align-items: center
 
 .delete-button
 	display: flex
@@ -59,20 +73,17 @@ $item-padding: 10px
 	justify-content: center
 	background: red
 	overflow: hidden
-	flex-grow: 0
-	flex-shrink: 0
 	min-width: 60px
+	height: 100%
 
 .edit-button
 	display: flex
 	align-items: center
 	justify-content: center
-	margin-left: 10px
 	background: #3477F5
 	overflow: hidden
-	flex-grow: 0
-	flex-shrink: 0
 	min-width: 60px
+	height: 100%
 
 .drag-placeholder
 	height: 0

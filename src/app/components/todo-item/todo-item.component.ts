@@ -36,7 +36,25 @@ import { TodoDataService } from '../../services/todo-data.service';
   		transition('decorated => plain', [
   			animate('0.1s')
   		])
-  	])
+  	]),
+    trigger("toggleModifyBtns", [
+      state('hidden', style({
+        transform: 'translateX(100%)',
+        width: '0px',
+        display: 'none'
+      })),
+      state('show', style({
+        transform: 'translateX(0%)',
+        width: 'auto',
+        display: 'flex'
+      })),
+      transition('hidden => show', [
+        animate('0.2s')
+      ]),
+      transition('show => hidden', [
+        animate('0.2s')
+      ])
+    ])
   ],
   preserveWhitespaces: true
 })
@@ -46,11 +64,13 @@ export class TodoItemComponent implements OnInit
 	@ViewChild('showEditing') editing: ElementRef;
 	isFullHeight: boolean = false;
   isEditing: boolean = false;
+  isModify: boolean = false;
 
 
 	constructor(private dataService: TodoDataService) { }
 
 	ngOnInit(): void {
+    this.isModify = window.innerWidth >= 600;
 	}
 
 	getTitle(): string
@@ -103,6 +123,11 @@ export class TodoItemComponent implements OnInit
 
   onSwipeLeft(event): void 
   {
-    alert("I'll be floored if this works")
+    this.isModify = true;
+  }
+
+  onSwipeRight(event): void 
+  {
+    this.isModify = false;
   }
 }

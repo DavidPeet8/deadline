@@ -1,4 +1,4 @@
-<section cdkDrag cdkDragLockAxis="y" class="todo-item" (swipeleft)="onSwipeLeft($event)" #item>
+<section cdkDrag cdkDragLockAxis="y" class="todo-item" (swipeleft)="onSwipeLeft($event)" (swiperight)="onSwipeRight($event)" #item>
 	<div class="drag-placeholder" *cdkDragPlaceholder></div>
 	<div class="reorder-handle" cdkDragHandle>
 		<i class="fas fa-bars"></i>
@@ -7,11 +7,13 @@
 		<p [@titleStyle]="isFullHeight ? 'decorated' : 'plain'" class="item-title">{{ getTitle() }}</p>
 		<p [@grow]="isFullHeight ? 'fullHeight' : 'noHeight'" class="item-body">{{ getBody() }}</p>
 	</div>
-	<div *ngIf="!isEditing; else showSave" class="edit-button" (click)="editItem($event)">
-		<i class="fas fa-pencil-alt"></i>
-	</div>
-	<div class="delete-button" (click)="deleteItem()">
-		<i class="fas fa-trash-alt"></i>
+	<div class="modify-btns" [@toggleModifyBtns]="isModify ? 'show' : 'hidden'">
+		<div *ngIf="!isEditing; else showSave" class="edit-button" (click)="editItem($event)">
+			<i class="fas fa-pencil-alt"></i>
+		</div>
+		<div class="delete-button" (click)="deleteItem()">
+			<i class="fas fa-trash-alt"></i>
+		</div>
 	</div>
 </section>
 

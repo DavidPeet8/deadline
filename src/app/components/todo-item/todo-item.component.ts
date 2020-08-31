@@ -40,13 +40,13 @@ import { TodoDataService } from '../../services/todo-data.service';
     trigger("toggleModifyBtns", [
       state('hidden', style({
         transform: 'translateX(100%)',
-        width: '0px',
-        display: 'none'
+        width: '0px'
+        //display: 'none'
       })),
       state('show', style({
         transform: 'translateX(0%)',
-        width: 'auto',
-        display: 'flex'
+        width: 'auto'
+        //display: 'flex'
       })),
       transition('hidden => show', [
         animate('0.2s')

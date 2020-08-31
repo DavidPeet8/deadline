@@ -1,6 +1,7 @@
 <section>
 	<div cdkDropList *ngIf="hasData(); else noData" class="todo-list" (cdkDropListDropped)="onDrop($event)">
 		<app-todo-item *ngFor="let item of dataItems" [model]="item"></app-todo-item>
+		<div class="spacer"></div>
 	</div>
 </section>
 

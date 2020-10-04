@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "deadline",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy": "gh-pages -d build",
-    "pbuild": "ng build --prod --output-path build --base-href /todo/"
+    "pbuild": "ng build --prod --output-path build --base-href /deadline/"
   },
   "private": true,
   "dependencies": {

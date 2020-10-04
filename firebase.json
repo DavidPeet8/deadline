@@ -1,8 +1,8 @@
 {
   "hosting": [
     {
-      "target": "todo",
-      "public": "dist/todo",
+      "target": "deadline",
+      "public": "build",
       "ignore": [
         "**/.*"
       ],

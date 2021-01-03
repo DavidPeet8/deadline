@@ -8,17 +8,15 @@ import { map } from "rxjs/operators";
 import { State } from "../models/state";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
-export class TodoDataService 
-{
+export class TodoDataService {
 	private itemsCollection: AngularFirestoreCollection<TodoItem>;
 	items: Observable<TodoItem[]>;
 	private numItems: number = null
 	private prevActions: State[] = []; // Keep max size of 5, most recent at 0, least recent at 5
 
-	constructor(private afs: AngularFirestore, private auth: AuthService ) 
-	{
+	constructor(private afs: AngularFirestore, private auth: AuthService) {
 		let uid = this.auth.getUid()
 		this.itemsCollection = this.afs.collection<TodoItem>(`users/${uid}/items`, ref => ref.orderBy('priority', 'asc'));
 
@@ -28,52 +26,44 @@ export class TodoDataService
 					const data = itemPayload.payload.doc.data() as TodoItem;
 					data.id = itemPayload.payload.doc.id;
 					return data;
-				}); 
+				});
 			})
 		);
-		this.items.subscribe(items => {this.numItems = items.length});
+		this.items.subscribe(items => { this.numItems = items.length });
 	}
 
-	addItem(item: TodoItem): void
-	{
+	addItem(item: TodoItem): void {
 		// this.prevActions.unshift(new State(item, 0));
-		// this.checkQueue();	
+		// this.checkQueue();
 		this._addItem(item);
 	}
 
-	private _addItem(item: TodoItem): void 
-	{
+	private _addItem(item: TodoItem): void {
 		this.itemsCollection.add(item);
 	}
 
-	deleteItem(item: TodoItem): void
-	{
+	deleteItem(item: TodoItem): void {
 		this.prevActions.unshift(new State(item, 1));
 		this.checkQueue();
 		this._deleteItem(item);
-		
+
 	}
 
-	private _deleteItem(item: TodoItem) 
-	{
+	private _deleteItem(item: TodoItem) {
 		let uid = this.auth.getUid();
 		const itemDoc = this.afs.doc(`users/${uid}/items/${item.id}`)
-		console.log(item);
-		console.log(itemDoc);
 		itemDoc.delete();
 	}
 
-	getNumItems(): number
-	{
+	getNumItems(): number {
 		return this.numItems;
 	}
 
-	updateItem(item: TodoItem) 
-	{
+	updateItem(item: TodoItem) {
 		let uid = this.auth.getUid();
 		const itemref: AngularFirestoreDocument<TodoItem> = this.afs.doc<TodoItem>(`users/${uid}/items/${item.id}`);
 
-		const data: TodoItem = 
+		const data: TodoItem =
 		{
 			id: item.id,
 			title: item.title,
@@ -84,16 +74,12 @@ export class TodoDataService
 		return itemref.set(data, { merge: true });
 	}
 
-	undo(): void
-	{
+	undo(): void {
 		if (this.prevActions.length == 0) return;
-		console.log(this.prevActions);
 		let prevState = this.prevActions.shift();
-		console.log(this.prevActions);
-		switch (prevState.action)
-		{
+		switch (prevState.action) {
 			case 0: // Insert
-				//Do Nothing, no point in deleting item, 
+				//Do Nothing, no point in deleting item,
 				break;
 			case 1: // Delete
 				this._addItem(prevState.itemState);
@@ -104,13 +90,9 @@ export class TodoDataService
 		}
 	}
 
-	private checkQueue(): void 
-	{
-		if (this.prevActions.length > 5)
-		{
+	private checkQueue(): void {
+		if (this.prevActions.length > 5) {
 			this.prevActions = this.prevActions.slice(5);
 		}
 	}
 }
-
-
